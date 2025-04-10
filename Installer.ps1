@@ -28,11 +28,11 @@ Write-Host "Unzipping"
 Expand-Archive $zipPath -dest $directory -force
 Remove-Item $zipPath
 
-# Checkin for Net Core Host
-$netCoreHost = Get-wmiobject -class win32_product | Where-Object {$_.Name -match "Microsoft .NET Core Host - 3.0" }
+# Checking for Net Core Host
+$netCoreHost = Get-wmiobject -class win32_product | Where-Object {$_.Name -match "Microsoft .NET Core Host - 3.1" }
 if([string]::IsNullOrEmpty($netCoreHost)) {
     Write-Host "Please install the hosting bundle and then restart the installation"
-    Start-Process "https://dotnet.microsoft.com/download/dotnet-core/thank-you/runtime-aspnetcore-3.0.0-windows-hosting-bundle-installer"
+    Start-Process "https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/3.1.32/dotnet-hosting-3.1.32-win.exe"
     exit 1
 }
 
